@@ -1,21 +1,16 @@
 package com.takipi.tests.counters;
 
+import com.takipi.tests.counters.implementations.*;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.takipi.tests.counters.implementations.Adder;
-import com.takipi.tests.counters.implementations.Atomic;
-import com.takipi.tests.counters.implementations.Dirty;
-import com.takipi.tests.counters.implementations.RWLock;
-import com.takipi.tests.counters.implementations.Synchronized;
-import com.takipi.tests.counters.implementations.Volatile;
-
-public class Main
+public class _AppMain
 {
 	public static long TARGET_NUMBER 	= 100000000l;
-	public static int THREADS 			= 10;
-	public static int ROUNDS 			= 10;
+	public static int  THREADS 			= 10;
+	public static int  ROUNDS 			= 10;
 	private static String COUNTER 		= Counters.DIRTY.toString();
 	
 	private static ExecutorService es;
@@ -37,8 +32,18 @@ public class Main
 		OPTIMISTIC
 	}
 	
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) throws InterruptedException {
+
+		ThreadsExample te = new ThreadsExample();
+		Thread thread1 = new Thread(te);
+		Thread thread2 = new Thread(te);
+
+		thread1.start();
+		thread2.start();
+		Thread.sleep(10000);
+		System.out.println("2 threads   incrementing an integer variable   100 times each without synchronization, \n" +
+				"\n" +
+				"what would be the possible minimum and maximum value?   \nanswer: between 2 and 200\n\n");
 		COUNTER = Counters.DIRTY.toString();
 		
 		if (args.length > 0)

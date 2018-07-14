@@ -20,9 +20,9 @@ public class Reader implements Runnable
 			
 			long count = counter.getCounter();
 			
-			if (count > Main.TARGET_NUMBER)
+			if (count > _AppMain.TARGET_NUMBER)
 			{
-				Main.publish(System.currentTimeMillis());
+				_AppMain.publish(System.currentTimeMillis());
 				break;
 			}
 		}
