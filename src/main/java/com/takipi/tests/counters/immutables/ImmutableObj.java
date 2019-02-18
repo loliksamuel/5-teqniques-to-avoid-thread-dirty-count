@@ -32,38 +32,54 @@ This means that :
 public final class ImmutableObj {
 
     private final int amount;
+    private final String name;
     private final Date date;
     private final ImmutableList<Order> orders;
 
-    public ImmutableObj(int amount, Date date, ImmutableList<Order> orders) {
+    public ImmutableObj(int amount, String name, Date date, ImmutableList<Order> orders) {
         this.amount = amount;
-        this.date = date;
+        this.name = name;
+        this.date = new Date(date.getTime());
         this.orders = orders;
     }
 
+
+    /// safe getters
     public ImmutableList<Order> getOrders() {
-        return orders;
+        return orders;//no new cause ImmutableList is immutable
     }
 
     public int getAmount() {
-        return amount;
+        return amount;//no new cause int is immutable
+    }
+
+    public String getName() {
+        return name;//no new cause String is immutable
     }
 
     public Date getDateTime() {
-        return date;
+        return new Date(date.getTime());//new cause Date is mutable
     }
 
+
+
+
+    ///safe setters
     public ImmutableObj addAmount(int amount) {
-        return new ImmutableObj(this.amount + amount, date, orders);
+        return new ImmutableObj(this.amount + amount, name, date, orders);
     }
 
     public ImmutableObj addOrder(Order newOrder) {
         ImmutableList<Order> newOrderList = new ImmutableList.Builder<Order>()
                 .addAll(orders).add(newOrder).build();
-        return new ImmutableObj(this.amount, date, newOrderList);
+        return new ImmutableObj(this.amount, name, date, newOrderList);
     }
 
     public ImmutableObj setDate(Date date) {
-        return new ImmutableObj(this.amount, new Date(date.getTime()), orders);
+        return new ImmutableObj(this.amount, name, new Date(date.getTime()), orders);
+    }
+
+    public ImmutableObj setName(String name) {
+        return new ImmutableObj(this.amount, name, date, orders);
     }
 }
