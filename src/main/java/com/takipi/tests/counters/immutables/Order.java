@@ -1,4 +1,4 @@
-package com.takipi.tests.counters.implementations.immutables;
+package com.takipi.tests.counters.immutables;
 
 //immutableOrder
 public final class Order {
