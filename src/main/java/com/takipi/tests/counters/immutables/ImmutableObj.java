@@ -8,8 +8,8 @@ An immutable object is an object whose internal state remains constant after it 
 1. make class final()to avoid inheritance)
 2. make all fields final and private
 3. copy mutable fields on constructor(like date)
-4. use safe getters on mutable fields
-5. use dafe setters : replace void setXXX(value)  methods  with ClassXXX setXXX(value) that create copy of ClassXXX
+4. use safe getters on mutable fields(using clone)
+5. use safe setters : replace void setXXX(value)  methods  with ClassXXX setXXX(value) that create copy of ClassXXX
 6. recommended to use immutable collections or scala/kotlin
 7. or libraries with annotations
 * 1. https://github.com/immutables/immutables
@@ -62,7 +62,7 @@ public final class ImmutableObj {
     }
 
     public Date getDateTime() {
-        return new Date(date.getTime());//new cause Date is mutable
+        return (Date)date.clone();//clone cause Date is mutable
     }
 
 
