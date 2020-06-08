@@ -1,10 +1,10 @@
 package com.takipi.tests.counters;
 
-public class Writer implements Runnable
+public class ThreadWriter implements Runnable
 {
 	private final Counter counter;
 	
-	public Writer(Counter counter)
+	public ThreadWriter(Counter counter)
 	{
 		this.counter = counter;
 	}

@@ -2,26 +2,25 @@ package com.takipi.tests.counters;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ThreadsExample implements Runnable {
+public class ThreadIncrement implements Runnable {
     static int counter = 1; // a global counter
 
     static ReentrantLock counterLock = new ReentrantLock(true); // enable fairness policy
 
     static void incrementCounter(){
-       // counterLock.lock();
+        //counterLock.lock();
 
-        // Always good practice to enclose locks in a try-finally block
         try{
             System.out.println(Thread.currentThread().getName() + ": " + counter);
             counter++;
-        }finally{
-          //   counterLock.unlock();
+        }finally{// Always good practice to enclose locks in a try-finally block
+         //    counterLock.unlock();
         }
      }
 
     @Override
     public void run() {
-        while(counter<100){
+        while(counter<10000){
             incrementCounter();
         }
     }
