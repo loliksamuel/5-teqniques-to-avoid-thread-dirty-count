@@ -13,4 +13,4 @@ and checking Benchmarking for few synchronization mechanism that Java8 provides:
 		STAMPED,
 		OPTIMISTIC
 
-note: it is recommended to use immutable objects
+note: it is recommended to use immutable objects rather than mutable objects + synchronization.
